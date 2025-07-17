@@ -1,21 +1,29 @@
 import { useEffect, useState } from "react";
 import Movie from "./Movie";
+import Pagination from "./Pagination";
 function MovieListByGenre({ genreSlug, title, limit }) {
   const [data, setData] = useState(null); // Đổi từ [] -> null để dễ kiểm tra load
   const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
-    fetch(`https://phimapi.com/v1/api/the-loai/${genreSlug}?limit=${limit}`)
+    setLoading(true);
+    fetch(
+      `https://phimapi.com/v1/api/the-loai/${genreSlug}?limit=${limit}&page=${currentPage}`
+    )
       .then((res) => res.json())
       .then((data) => {
-        setData(data.data.items);
+        setData(data.data);
         setLoading(false);
       })
       .catch((error) => {
         console.error("Error:", error);
         setLoading(false);
       });
-  }, [genreSlug]);
+  }, [genreSlug, currentPage, limit]);
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" }); // 👈 kéo mượt mà lên đầu
+  }, [currentPage]);
 
   return (
     <div className="bg-[#09121d]">
@@ -24,10 +32,15 @@ function MovieListByGenre({ genreSlug, title, limit }) {
           {title}
           <div className="h-[1px] w-full bg-[#ffffff93] absolute "></div>
         </div>
-        <div className="grid grid-cols-2 lg:grid-cols-6 gap-[15px] mt-[7.5px]">
-          <Movie data={data} loading={loading} />
+        <div className="grid grid-cols-2 lg:grid-cols-6 gap-[15px] mt-[7.5px] lg:min-h-[500px] ">
+          <Movie data={data?.items} loading={loading} />
         </div>
       </div>
+      <Pagination
+        currentPage={currentPage}
+        onPageChange={(page) => setCurrentPage(page)}
+        totalPages={data?.params.pagination.totalPages}
+      />
     </div>
   );
 }

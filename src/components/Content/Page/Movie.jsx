@@ -1,12 +1,14 @@
-// Movie.jsx
 import { Link } from "react-router-dom";
 import { AiOutlineLoading } from "react-icons/ai";
 
 function Movie({ data, loading }) {
-  if (loading)
+  if (loading) {
     return <AiOutlineLoading className="text-white text-8xl animate-spin" />;
-  if (!data || data.length === 0)
+  }
+
+  if (!loading && data.length === 0) {
     return <p className="text-white">Không có phim 😢</p>;
+  }
 
   return data.map((item) => (
     <div key={item._id}>

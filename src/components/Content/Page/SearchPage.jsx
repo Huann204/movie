@@ -35,7 +35,9 @@ function SearchPage() {
       setSearchParams({ q: query.trim() });
     }
   };
-
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" }); // 👈 kéo mượt mà lên đầu
+  }, []);
   return (
     <div className="bg-[#09121d] min-h-screen text-white px-4 py-6">
       <div className="max-w-[1320px] mx-auto">
@@ -49,7 +51,7 @@ function SearchPage() {
           />
         </form>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 ">
           <Movie data={data} loading={loading} />
         </div>
       </div>

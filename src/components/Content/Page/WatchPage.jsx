@@ -25,8 +25,10 @@ function WatchPage() {
 
   if (!movie)
     return (
-      <div className="bg-[#09121d] min-h-36">
-        <AiOutlineLoading className=" text-white text-8xl animate-spin" />
+      <div className="bg-[#09121d] ">
+        <div className="pt-6 px-[7.5px] lg:max-w-[1320px] lg:m lg:ml-auto lg:mr-auto lg:min-h-[500px]">
+          <AiOutlineLoading className=" text-white text-8xl animate-spin" />
+        </div>
       </div>
     );
   return (

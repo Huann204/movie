@@ -12,13 +12,17 @@ function MovieDetail() {
       .then((data) => setMovie(data.movie))
       .catch((err) => console.error(err));
   }, [slug]);
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [slug]);
 
   if (!movie)
     return (
-      <div className="bg-[#09121d] ">
+      <div className="bg-[#09121d] lg:min-h-[500px]">
         <AiOutlineLoading className=" min-h-36 text-white text-8xl animate-spin" />
       </div>
     );
+
   return (
     <>
       <div className="bg-[#09121d]  ">
@@ -49,7 +53,10 @@ function MovieDetail() {
             <p>Phim: {movie.name}</p> <br />
             <p>Thời gian: {movie.time}</p> <br />
             <p>Nội dung: {movie.content}</p> <br />
-            <p>Diễn Viên: {movie.actor}</p>
+            Diễn Viên:
+            {movie.actor.map((actor, index) => (
+              <p key={index}>- {actor}</p>
+            ))}
           </div>
         </div>
       </div>
