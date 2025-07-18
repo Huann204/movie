@@ -1,7 +1,8 @@
 // SearchPage.jsx
 import React, { useState, useEffect } from "react";
-import Movie from "./Movie"; // import component đã tách
+// import Movie from "./Movie"; // import component đã tách
 import { useSearchParams } from "react-router-dom";
+import Movie from "../../components/shared/Movie";
 
 function SearchPage() {
   const [query, setQuery] = useState("");

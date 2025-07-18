@@ -1,8 +1,8 @@
-// Pagination.jsx
-import MovieListByGenre from "../MovieListByGenre";
 import { useState, useEffect } from "react";
-import Pagination from "./Pagination";
+
 import { useParams } from "react-router-dom";
+import Pagination from "../../components/shared/Pagination";
+import MovieListByGenre from "../../components/shared/MovieListByGenre";
 
 function AllMovies({ limit }) {
   const { slug } = useParams();

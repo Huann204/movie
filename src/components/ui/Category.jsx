@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import Movie from "./Movie";
-import Pagination from "./Pagination";
+import Movie from "../shared/Movie";
+// import Pagination from "./Pagination";
+import Pagination from "../shared/Pagination";
 function MovieListByGenre({ genreSlug, title, limit }) {
-  const [data, setData] = useState(null); // Đổi từ [] -> null để dễ kiểm tra load
+  const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
 

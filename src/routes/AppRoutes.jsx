@@ -1,14 +1,25 @@
-import HomePage from "./Page/HomePage";
+// import HomePage from "./Content/HomePage.jsx";
 import { Routes, Route } from "react-router-dom";
-import MovieDetail from "./Page/MovieDetail";
-import WatchPage from "./Page/WatchPage";
-import SearchPage from "./Page/SearchPage";
+import AllMovies from "../pages/Movies/AllMovies";
+import HomePage from "../pages/Home/HomePage";
+import SearchPage from "../pages/Search/SearchPage";
+import MovieDetail from "../pages/Movies/MovieDetail";
+import WatchPage from "../pages/Movies/WatchPage";
+import Category from "../components/ui/Category";
+// import MovieDetail from "./Page/MovieDetail";
+// import WatchPage from "./Page/WatchPage";
+// import SearchPage from "./Page/SearchPage";
 
-import MovieListByGenre from "./MovieListByGenre";
-import Category from "./Page/Category";
-import AllMovies from "./Page/AllMovies";
+// import Category from "./Page/Category";
+// import AllMovies from "./Page/AllMovies";
+// import HomePage from "../components/Content/Page/HomePage";
+// import SearchPage from "../components/Content/Page/SearchPage";
+// import MovieDetail from "../components/Content/Page/MovieDetail";
+// import WatchPage from "../components/Content/Page/WatchPage";
+// import Category from "../components/Content/Page/Category";
+// import AllMovies from "../components/Content/Page/AllMovies";
 
-function Content() {
+function AppRoutes() {
   return (
     <>
       <Routes>
@@ -50,4 +61,4 @@ function Content() {
   );
 }
 
-export default Content;
+export default AppRoutes;

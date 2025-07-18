@@ -1,4 +1,5 @@
-import MovieListByGenre from "../MovieListByGenre";
+import MovieListByGenre from "../../components/shared/MovieListByGenre";
+
 function HomePage() {
   const isMobile = window.innerWidth < 768;
   const limit = isMobile ? 6 : 12;

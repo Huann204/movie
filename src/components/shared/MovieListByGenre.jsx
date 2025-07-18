@@ -12,29 +12,21 @@ function Movie({ data, loading }) {
     <div key={item._id}>
       <Link to={`/phim/${item.slug}`}>
         <div className="text-[#dbdbdb] w-full h-[300px] overflow-hidden">
-          <a href="">
-            <img
-              src={`https://img.phimapi.com/${item.poster_url}`}
-              alt=""
-              className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-            />
-          </a>
+          <img
+            src={`https://img.phimapi.com/${item.poster_url}`}
+            alt=""
+            className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+          />
         </div>
       </Link>
       <Link to={`phim/${item.slug}`}>
         <div className="text-sm text-[#dbdbdb] gap-1 w-full flex flex-col overflow-hidden mt-1 font-semibold uppercase">
-          <a
-            href=""
-            className="whitespace-nowrap overflow-hidden text-ellipsis w-full"
-          >
+          <div className="whitespace-nowrap overflow-hidden text-ellipsis w-full">
             {item.name}
-          </a>
-          <a
-            href=""
-            className="whitespace-nowrap overflow-hidden text-ellipsis w-full"
-          >
+          </div>
+          <div className="whitespace-nowrap overflow-hidden text-ellipsis w-full">
             {item.origin_name}
-          </a>
+          </div>
         </div>
       </Link>
     </div>

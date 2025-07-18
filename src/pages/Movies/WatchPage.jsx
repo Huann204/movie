@@ -1,4 +1,4 @@
-import HlsPlayer from "./hls/hls";
+import HlsPlayer from "../../components/hls/hls";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { AiOutlineLoading } from "react-icons/ai";
