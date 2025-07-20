@@ -30,7 +30,7 @@ function HlsPlayer({ src }) {
     <video
       ref={videoRef}
       controls
-      className="w-full rounded-md"
+      className="w-full h-full rounded-md"
       autoPlay
     ></video>
   );

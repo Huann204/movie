@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Movie from "../shared/Movie";
-// import Pagination from "./Pagination";
 import Pagination from "../shared/Pagination";
+
 function MovieListByGenre({ genreSlug, title, limit }) {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -22,21 +22,29 @@ function MovieListByGenre({ genreSlug, title, limit }) {
         setLoading(false);
       });
   }, [genreSlug, currentPage, limit]);
+
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" }); // 👈 kéo mượt mà lên đầu
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }, [currentPage]);
 
   return (
     <div className="bg-[#09121d]">
-      <div className="pt-6 px-[7.5px] lg:max-w-[1320px] lg:m lg:ml-auto lg:mr-auto ">
-        <div className="text-[#b1a21e] font-normal text-xl relative">
-          {title}
-          <div className="h-[1px] w-full bg-[#ffffff93] absolute "></div>
+      <div className="pt-6 px-4 container mx-auto max-w-7xl">
+        {/* Header */}
+        <div className="mb-4">
+          <h2 className="text-[#b1a21e] font-semibold text-xl md:text-2xl">
+            {title}
+          </h2>
+          {/* Divider */}
+          <div className="h-px w-full bg-gradient-to-r from-transparent via-white/20 to-transparent mt-2" />
         </div>
-        <div className="grid grid-cols-2 lg:grid-cols-6 gap-[15px] mt-[7.5px] lg:min-h-[500px] ">
+
+        {/* Movies Grid */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 md:gap-6 min-h-[500px]">
           <Movie data={data?.items} loading={loading} />
         </div>
       </div>
+
       <Pagination
         currentPage={currentPage}
         onPageChange={(page) => setCurrentPage(page)}

@@ -5,12 +5,21 @@ import { useState, useEffect } from "react";
 import Tippy from "@tippyjs/react/headless";
 import { Link } from "react-router-dom";
 import { FaSearch } from "react-icons/fa";
+
 function Header() {
   const [visible, setVisible] = useState(false);
-  // const [open, setOpen] = useState(false);
   const [hidden, setHidden] = useState(false);
   const [value, setValue] = useState("");
   const [data, setData] = useState([]);
+
+  const menuItems = [
+    { text: "Tìm kiếm", link: "/tim-kiem" },
+    { text: "Phim Hành Động", link: "/phim-hanh-dong" },
+    { text: "Phim Kinh Dị", link: "/phim-kinh-di" },
+    { text: "Phim Tình Cảm", link: "/phim-tinh-cam" },
+    { text: "Phim Viễn Tưởng", link: "/phim-vien-tuong" },
+  ];
+
   useEffect(() => {
     const handleClickOutside = (e) => {
       const wrapper = document.querySelector(".wrapper");
@@ -24,6 +33,7 @@ function Header() {
     document.addEventListener("click", handleClickOutside);
     return () => document.removeEventListener("click", handleClickOutside);
   }, []);
+
   useEffect(() => {
     const encoded = encodeURIComponent(value.trim());
     if (!encoded) {
@@ -45,15 +55,13 @@ function Header() {
           console.error("API error:", err);
           setData([]);
         });
-    }, 500); // ⏳ 500ms sau khi người dùng ngừng gõ
+    }, 500);
 
-    return () => clearTimeout(delayDebounce); // 🧹 clear timeout nếu user gõ tiếp
+    return () => clearTimeout(delayDebounce);
   }, [value]);
-  // const handleOpen = () => {
-  //   setOpen(!open);
-  // };
+
   const handleClick = () => {
-    setVisible(!visible); // toggle menu
+    setVisible(!visible);
   };
 
   const handleSearchClick = () => {
@@ -61,117 +69,82 @@ function Header() {
   };
 
   const handleClickOutside = () => {
-    setVisible(() => !hidden); // click ra ngoài là ẩn
+    setVisible(() => !visible);
   };
 
   const Menu = (
-    <div>
-      <ul className="bg-[#0b2b4c]">
-        {[
-          "Tìm kiếm",
-          "Phim Hành Động",
-          "Phim Kinh Dị",
-          "Phim Tình Cảm",
-          "Phim Viễn Tưởng",
-        ].map((text, idx) => {
-          // Xác định link cho mỗi mục
-          const link =
-            text === "Tìm kiếm"
-              ? "/tim-kiem"
-              : text === "Phim Hành Động"
-              ? "/phim-hanh-dong"
-              : text === "Phim Kinh Dị"
-              ? "/phim-kinh-di"
-              : text === "Phim Tình Cảm"
-              ? "/phim-tinh-cam"
-              : text === "Phim Viễn Tưởng"
-              ? "/phim-vien-tuong"
-              : "/"; // Đường dẫn mặc định nếu không tìm thấy
-
-          return (
-            <li key={idx} className="border-b border-solid border-[#fda399]">
-              <Link
-                to={link} // Gắn đường dẫn tương ứng
-                className="block text-[10px] py-3 px-5 text-white w-[200px] hover:bg-[#fda399] hover:pl-6"
-              >
-                {text}
-              </Link>
-            </li>
-          );
-        })}
+    <div className="bg-[#0b2b4c] rounded-lg shadow-xl border border-[#fda399]/20 overflow-hidden">
+      <ul>
+        {menuItems.map((item, idx) => (
+          <li
+            key={idx}
+            className="border-b border-[#fda399]/20 last:border-b-0"
+          >
+            <Link
+              to={item.link}
+              onClick={() => setVisible(false)}
+              className="block text-sm py-3 px-5 text-white w-52 hover:bg-[#fda399] hover:pl-6 transition-all duration-300 ease-in-out"
+            >
+              {item.text}
+            </Link>
+          </li>
+        ))}
       </ul>
     </div>
   );
 
   return (
-    <div className="font-[Roboto, sans-serif] p-[15px] flex items-center justify-between sticky top-0 z-10 bg-[#09121d] flex-row-reverse lg:flex-row lg:justify-between">
-      <div className="flex w-full ">
-        <div className="lg:flex lg:flex-1 m-auto lg:m-0 ">
-          {/* logo */}
-          <Link to="/">
+    <header className="font-[Roboto,sans-serif] p-4 flex items-center justify-between sticky top-0 z-50 bg-[#09121d]/95 backdrop-blur-md border-b border-white/10 shadow-lg">
+      <div className="flex w-full items-center">
+        {/* Logo */}
+        <div className="flex-shrink-0">
+          <Link to="/" className="block">
             <img
-              className="w-32 h-6 lg:w-[155px] lg:h-9 object-cover"
+              className="w-32 h-6 lg:w-[155px] lg:h-9 object-cover hover:scale-105 transition-transform duration-300"
               src={Logo}
-              alt="logo"
+              alt="Logo"
             />
           </Link>
-
-          {/* menu lớn khi màn hình rộng */}
-          <ul className="hidden lg:flex">
-            {[
-              "Tìm Kiếm",
-              "Phim Hành Động",
-              "Phim Kinh Dị",
-              "Phim Tình Cảm",
-              "Phim Viễn Tưởng",
-            ].map((text, idx) => {
-              // Tạo một đường dẫn phù hợp cho từng mục
-              const link =
-                text === "Tìm Kiếm"
-                  ? "/tim-kiem"
-                  : text === "Phim Hành Động"
-                  ? "/phim-hanh-dong"
-                  : text === "Phim Kinh Dị"
-                  ? "/phim-kinh-di"
-                  : text === "Phim Tình Cảm"
-                  ? "/phim-tinh-cam"
-                  : text === "Phim Viễn Tưởng"
-                  ? "/phim-vien-tuong"
-                  : "/"; // Đường dẫn mặc định nếu không tìm thấy
-
-              return (
-                <li key={idx}>
-                  <Link
-                    to={link}
-                    className="text-white py-2 px-2 font-medium rounded-md hover:text-[#0b2b4c] hover:bg-[#fda399]"
-                  >
-                    {text}
-                  </Link>
-                </li>
-              );
-            })}
-          </ul>
         </div>
 
-        <div className="wrapper">
-          <div className=" lg:block absolute top-1/2 right-4 transform -translate-y-1/2 lg:w-1/4">
+        {/* Desktop Navigation */}
+        <nav className="hidden lg:flex lg:flex-1 lg:justify-center">
+          <ul className="flex space-x-1">
+            {menuItems.map((item, idx) => (
+              <li key={idx}>
+                <Link
+                  to={item.link}
+                  className="text-white py-2 px-4 font-medium rounded-lg hover:text-[#0b2b4c] hover:bg-[#fda399] transition-all duration-300 ease-in-out transform hover:scale-105"
+                >
+                  {item.text}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        {/* Search */}
+        <div className="wrapper flex-shrink-0 ml-auto">
+          <div className="relative">
             <input
               value={value}
               onChange={(e) => setValue(e.target.value)}
               type="text"
-              placeholder="Nhập tên phim.."
-              className={`lg:block  lg:w-full outline-none bg-[#09121d] text-white border border-white rounded px-3 py-1 pr-8 relative ${
-                hidden ? "block" : "hidden"
+              placeholder="Nhập tên phim..."
+              className={`lg:block w-[150px] lg:w-80 h-[30px] lg:h-[42px] lg:w-30 outline-none bg-[#09121d] text-white border border-white/30 rounded-lg px-4 py-2 pr-10 focus:border-[#fda399] focus:ring-2 focus:ring-[#fda399]/20 transition-all duration-300 ${
+                hidden ? "block " : "hidden"
               }`}
             />
-            <div
-              className="absolute text-white right-2 top-1/2 transform -translate-y-1/2 transition-all duration-300 hover:scale-110 active:rotate-90"
+            <button
               onClick={handleSearchClick}
+              className="absolute right-3 top-1/2 transform -translate-y-1/2 text-white/70 hover:text-[#fda399] transition-all duration-300 hover:scale-110 active:rotate-90"
             >
               <FaSearch />
-            </div>
+            </button>
+
+            {/* Search Results */}
             {data.length > 0 && (
-              <div className="absolute top-[2.2rem] w-full max-h-64 overflow-y-auto overflow-x-hidden bg-[#09121d] shadow-[-8px_8px_20px_rgba(255,0,102,0.3)] rounded-lg">
+              <div className="absolute top-12 right-[-45px] lg:right-0 w-52 lg:w-full max-h-64 overflow-y-auto bg-[#09121d] border border-white/20 rounded-lg shadow-xl z-50">
                 {data.map((item, index) => (
                   <Link to={`/phim/${item.slug}`} key={index}>
                     <div
@@ -180,19 +153,20 @@ function Header() {
                         setValue("");
                         setHidden(false);
                       }}
-                      className="flex w-full p-3 cursor-pointer bg-[#09121d]"
+                      className="flex p-2 cursor-pointer hover:bg-[#0b2b4c] transition-colors duration-200 border-b border-white/10 last:border-b-0"
                     >
-                      <div className="w-8 flex-shrink-0">
+                      <div className="w-10 h-14 flex-shrink-0 rounded overflow-hidden">
                         <img
                           src={`https://img.phimapi.com/${item.poster_url}`}
-                          alt=""
+                          alt={item.name}
+                          className="w-full h-full object-cover"
                         />
                       </div>
-                      <div className="text-white ml-1 text-sm w-full">
-                        <p className="text-ellipsis overflow-hidden whitespace-nowrap w-[170px] lg:w-[260px]">
+                      <div className="ml-3 flex-1 min-w-0">
+                        <p className="text-white text-sm font-medium truncate">
                           {item.name}
                         </p>
-                        <p className="text-ellipsis overflow-hidden whitespace-nowrap w-[170px] lg:w-[260px]">
+                        <p className="text-gray-400 text-xs truncate">
                           {item.origin_name}
                         </p>
                       </div>
@@ -205,7 +179,7 @@ function Header() {
         </div>
       </div>
 
-      {/* menu di động */}
+      {/* Mobile Menu */}
       <Tippy
         visible={visible}
         interactive
@@ -214,15 +188,15 @@ function Header() {
         render={() => <div className="p-0">{Menu}</div>}
       >
         <div>
-          <span>
-            <IoIosMenu
-              onClick={handleClick}
-              className="text-white text-[2rem] lg:hidden cursor-pointer"
-            />
-          </span>
+          <button
+            onClick={handleClick}
+            className="text-white text-3xl lg:hidden cursor-pointer hover:text-[#fda399] transition-colors duration-300 ml-4 flex items-center"
+          >
+            <IoIosMenu />
+          </button>
         </div>
       </Tippy>
-    </div>
+    </header>
   );
 }
 
