@@ -40,7 +40,7 @@ function WatchPage() {
       });
   }, [slug]);
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" }); // 👈 kéo mượt mà lên đầu
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }, [slug]);
   // Xử lý chọn server
   const handleServerChange = (serverIndex) => {

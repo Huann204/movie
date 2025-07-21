@@ -29,6 +29,7 @@ function Movie({ data, loading }) {
         <div className="relative w-full h-[300px] overflow-hidden rounded-lg shadow-lg">
           <img
             src={`https://img.phimapi.com/${item.poster_url}`}
+            loading="lazy"
             alt={item.name}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
           />
