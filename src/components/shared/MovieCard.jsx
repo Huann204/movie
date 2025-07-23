@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { AiOutlineLoading } from "react-icons/ai";
 
-function Movie({ data, loading }) {
+function MovieCard({ data, loading }) {
   if (loading) {
     return (
       <div className="flex justify-center items-center col-span-full h-32">
@@ -48,4 +48,4 @@ function Movie({ data, loading }) {
   ));
 }
 
-export default Movie;
+export default MovieCard;

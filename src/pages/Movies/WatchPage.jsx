@@ -2,6 +2,7 @@ import HlsPlayer from "../../components/hls/hls";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { AiOutlineLoading, AiOutlineVideoCamera } from "react-icons/ai";
+import { getMovieDetail } from "../../services/api";
 
 function WatchPage() {
   const { slug } = useParams();
@@ -12,16 +13,12 @@ function WatchPage() {
   const [servers, setServers] = useState([]); // Danh sách server
   const [error, setError] = useState(null); // Xử lý lỗi
 
-  // Gọi API như code gốc
   useEffect(() => {
-    fetch(`https://phimapi.com/phim/${slug}`)
-      .then((res) => {
-        if (!res.ok) throw new Error("Không thể tải dữ liệu phim");
-        return res.json();
-      })
-      .then((data) => {
+    getMovieDetail(slug)
+      .then((datas) => {
+        const data = datas.data.item;
         // Lưu thông tin phim và danh sách server
-        setMovieInfo(data.movie);
+        setMovieInfo(data);
         setServers(data.episodes);
 
         // Lấy danh sách tập từ server đầu tiên
@@ -196,7 +193,7 @@ function WatchPage() {
         </div>
       </div>
 
-      <style jsx>{`
+      <style>{`
         .custom-scrollbar::-webkit-scrollbar {
           width: 4px;
         }

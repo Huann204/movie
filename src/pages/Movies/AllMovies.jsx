@@ -2,7 +2,8 @@ import { useState, useEffect } from "react";
 
 import { useParams } from "react-router-dom";
 import Pagination from "../../components/shared/Pagination";
-import MovieListByGenre from "../../components/shared/MovieListByGenre";
+
+import MovieList from "../../components/shared/MovieList";
 
 function AllMovies({ limit }) {
   const { slug } = useParams();
@@ -30,12 +31,12 @@ function AllMovies({ limit }) {
   };
   // console.log(movies.data.params.totalPages);
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" }); // 👈 kéo mượt mà lên đầu
-  }, [currentPage]); // 👈 chạy mỗi khi trang thay đổi
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [currentPage]);
 
   return (
     <div>
-      <MovieListByGenre
+      <MovieList
         genreSlug={slug}
         title={title}
         limit={limit}

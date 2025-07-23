@@ -3,9 +3,11 @@ import { Routes, Route } from "react-router-dom";
 import AllMovies from "../pages/Movies/AllMovies";
 import HomePage from "../pages/Home/HomePage";
 import SearchPage from "../pages/Search/SearchPage";
-import MovieDetail from "../pages/Movies/MovieDetail";
+
 import WatchPage from "../pages/Movies/WatchPage";
-import Category from "../components/ui/Category";
+
+import MovieDetailPage from "../pages/Movies/MovieDetailPage";
+import CategoryPage from "../components/ui/CategoryPage";
 // import MovieDetail from "./Page/MovieDetail";
 // import WatchPage from "./Page/WatchPage";
 // import SearchPage from "./Page/SearchPage";
@@ -25,30 +27,38 @@ function AppRoutes() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/tim-kiem" element={<SearchPage />} />
-        <Route path="/phim/:slug" element={<MovieDetail />} />
+        <Route path="/phim/:slug" element={<MovieDetailPage />} />
         <Route path="/watch/:slug" element={<WatchPage />} />
         <Route
           path="/phim-hanh-dong"
           element={
-            <Category genreSlug="hanh-dong" title="Phim Hành động" limit="18" />
+            <CategoryPage
+              genreSlug="hanh-dong"
+              title="Phim Hành động"
+              limit="18"
+            />
           }
         />
         <Route
           path="/phim-kinh-di"
           element={
-            <Category genreSlug="kinh-di" title="Phim Kinh Dị" limit="18" />
+            <CategoryPage genreSlug="kinh-di" title="Phim Kinh Dị" limit="18" />
           }
         />
         <Route
           path="/phim-tinh-cam"
           element={
-            <Category genreSlug="tinh-cam" title="Phim Tình Cảm" limit="18" />
+            <CategoryPage
+              genreSlug="tinh-cam"
+              title="Phim Tình Cảm"
+              limit="18"
+            />
           }
         />
         <Route
           path="/phim-vien-tuong"
           element={
-            <Category
+            <CategoryPage
               genreSlug="vien-tuong"
               title="Phim Viễn Tưởng"
               limit="24"

@@ -3,15 +3,15 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { AiOutlineLoading } from "react-icons/ai";
 import { FaPlay } from "react-icons/fa";
+import { getMovieDetail } from "../../services/api";
 
-function MovieDetail() {
+function MovieDetailPage() {
   const { slug } = useParams();
   const [movie, setMovie] = useState(null);
 
   useEffect(() => {
-    fetch(`https://phimapi.com/phim/${slug}`)
-      .then((res) => res.json())
-      .then((data) => setMovie(data.movie))
+    getMovieDetail(slug)
+      .then((data) => setMovie(data.data.item))
       .catch((err) => console.error(err));
   }, [slug]);
 
@@ -309,4 +309,4 @@ function MovieDetail() {
   );
 }
 
-export default MovieDetail;
+export default MovieDetailPage;

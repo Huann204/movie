@@ -1,18 +1,16 @@
 import { useEffect, useState } from "react";
-import Movie from "../shared/Movie";
 import Pagination from "../shared/Pagination";
+import { getMoviesByGenre } from "../../services/api";
+import MovieCard from "../shared/MovieCard";
 
-function MovieListByGenre({ genreSlug, title, limit }) {
+function CategoryPage({ genreSlug, title, limit }) {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     setLoading(true);
-    fetch(
-      `https://phimapi.com/v1/api/the-loai/${genreSlug}?limit=${limit}&page=${currentPage}`
-    )
-      .then((res) => res.json())
+    getMoviesByGenre(genreSlug, limit, currentPage)
       .then((data) => {
         setData(data.data);
         setLoading(false);
@@ -41,7 +39,7 @@ function MovieListByGenre({ genreSlug, title, limit }) {
 
         {/* Movies Grid */}
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 md:gap-6 min-h-[500px]">
-          <Movie data={data?.items} loading={loading} />
+          <MovieCard data={data?.items} loading={loading} />
         </div>
       </div>
 
@@ -54,4 +52,4 @@ function MovieListByGenre({ genreSlug, title, limit }) {
   );
 }
 
-export default MovieListByGenre;
+export default CategoryPage;

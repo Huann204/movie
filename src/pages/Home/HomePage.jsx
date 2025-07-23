@@ -1,32 +1,32 @@
-import MovieListByGenre from "../../components/shared/MovieListByGenre";
+import MovieList from "../../components/shared/MovieList";
 
 function HomePage() {
   const isMobile = window.innerWidth < 768;
   const limit = isMobile ? 6 : 12;
   return (
     <>
-      <MovieListByGenre
+      <MovieList
         genreSlug="phim-le"
         title="PHIM LẺ ĐỀ CỬ"
         limit={limit}
         page="1"
         showSeeAll
       />
-      <MovieListByGenre
+      <MovieList
         genreSlug="phim-bo"
         title="PHIM BỘ ĐỀ CỬ"
         limit={limit}
         page="1"
         showSeeAll
       />
-      <MovieListByGenre
+      <MovieList
         genreSlug="hoat-hinh"
         title="PHIM HOẠT HÌNH"
         limit={limit}
         page="1"
         showSeeAll
       />
-      <MovieListByGenre
+      <MovieList
         genreSlug="tv-shows"
         title="TV SHOWS ĐỀ CỬ"
         limit={limit}

@@ -2,8 +2,9 @@
 import React, { useState, useEffect } from "react";
 // import Movie from "./Movie"; // import component đã tách
 import { useSearchParams } from "react-router-dom";
-import Movie from "../../components/shared/Movie";
 
+import { searchMovies } from "../../services/api";
+import MovieCard from "../../components/shared/MovieCard";
 function SearchPage() {
   const [query, setQuery] = useState("");
   const [data, setData] = useState([]);
@@ -18,8 +19,7 @@ function SearchPage() {
     if (!keyword) return;
 
     setLoading(true);
-    fetch(`https://phimapi.com/v1/api/tim-kiem?keyword=${keyword}`)
-      .then((res) => res.json())
+    searchMovies(keyword)
       .then((res) => {
         setData(res.data.items || []);
         setLoading(false);
@@ -53,7 +53,7 @@ function SearchPage() {
         </form>
 
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 ">
-          <Movie data={data} loading={loading} />
+          <MovieCard data={data} loading={loading} />
         </div>
       </div>
     </div>
